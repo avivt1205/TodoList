@@ -1,0 +1,22 @@
+#list {
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+}
+#list li {
+    direction: ltr;
+}
+
+#list li.checked {
+    position: relative;
+}
+
+#list li.checked::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    left: 0;
+    height: 1px;
+    background: #000;
+}
