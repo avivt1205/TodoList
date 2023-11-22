@@ -2,37 +2,36 @@
 
 const addBtn = document.getElementById('btn');
 const inputValue = document.getElementById('addVal');
+const list = document.getElementById('list');
+let newListArr = [];
 
-addBtn.addEventListener('click', function() {
-    //let inputValueText = inputValue.value;
-    console.log('inputValue', inputValue.value)
-    const list = document.getElementById('list');
-
+addBtn.addEventListener('click', () => {
     const newLi = document.createElement('li');
+    newLi.innerHTML = inputValue.value;
+
     const newCheckbox = document.createElement('input');
-    
     newCheckbox.type = "checkbox";
     newCheckbox.name = "finishedTask";
-    newLi.innerHTML = inputValue.value;
+
     newLi.appendChild(newCheckbox);
     list.appendChild(newLi);
 
     inputValue.value = "";
-    checkListLength();
-})
+    updatingList();
+});
 
-
-function checkListLength() {
-    const finishedTask = document.getElementsByName('finishedTask');
-
-    console.log(finishedTask.length);
-
-    for(let i = 0; i < finishedTask.length; i++) {
-        let itemChecked = false;
-        finishedTask[i].addEventListener('change', function() {
-            this.parentElement.classList.toggle('checked');
-        });
-
-    }
-
+function updatingList() {
+    newListArr = list.children;
+    runningTask();
 }
+
+function runningTask() {
+    for(let i = 0; i < newListArr.length; i++) {
+        let item = newListArr[i];
+        item.addEventListener('click', function() {
+            this.classList.toggle('checked')
+        })
+    }
+}
+
+updatingList();
